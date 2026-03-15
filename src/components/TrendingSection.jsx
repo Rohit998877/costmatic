@@ -67,9 +67,46 @@ function TrendingSection() {
                   ⭐ {item.rating || 4.7}
                 </p>
 
-                <p className={styles.price}>
-                  ₹{item.price}
-                </p>
+                <div className={styles.price}>
+
+{item.discountPrice ? (
+
+<>
+
+<span style={{textDecoration:"line-through",color:"gray",marginRight:"8px"}}>
+
+₹{item.price}
+
+</span>
+
+<span style={{color:"#be123c",fontWeight:"700"}}>
+
+₹{item.discountPrice}
+
+</span>
+
+<span style={{
+background:"#16a34a",
+color:"white",
+fontSize:"11px",
+padding:"3px 6px",
+borderRadius:"5px",
+marginLeft:"8px"
+}}>
+
+{Math.round(((item.price-item.discountPrice)/item.price)*100)}% OFF
+
+</span>
+
+</>
+
+) : (
+
+<span>₹{item.price}</span>
+
+)}
+
+</div>
 
                 <button
                   className={styles.btn}
