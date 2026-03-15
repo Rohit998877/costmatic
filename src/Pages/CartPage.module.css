@@ -1,40 +1,110 @@
-.container {
-  padding: 120px 80px;
+.container{
+  padding:120px 80px;
 }
 
-.empty {
-  text-align: center;
-  margin-top: 40px;
-  font-size: 18px;
+.empty{
+  text-align:center;
+  margin-top:40px;
+  font-size:18px;
 }
 
-.card {
-  display: flex;
-  gap: 20px;
-  background: white;
-  padding: 20px;
-  margin-bottom: 25px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+.card{
+  display:flex;
+  gap:20px;
+  background:white;
+  padding:20px;
+  margin-bottom:25px;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
 }
 
-.image {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 10px;
+.image{
+  width:120px;
+  height:120px;
+  object-fit:cover;
+  border-radius:10px;
 }
 
-.details {
-  flex: 1;
+.details{
+  flex:1;
 }
 
-.price {
-  font-weight: bold;
-  margin: 8px 0;
+.priceBox{
+  margin:8px 0;
 }
 
-.qtyBox {
+.oldPrice{
+  text-decoration:line-through;
+  color:gray;
+  margin-right:10px;
+}
+
+.newPrice{
+  color:#be123c;
+  font-weight:bold;
+  font-size:16px;
+}
+
+.qtyBox{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin:10px 0;
+}
+
+.qtyBtn{
+  width:32px;
+  height:32px;
+  border:none;
+  background:#be123c;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:18px;
+}
+
+.qtyBtn:hover{
+  background:black;
+}
+
+.subtotal{
+  margin-top:10px;
+  font-weight:500;
+}
+
+.removeBtn{
+  margin-top:10px;
+  background:#ef4444;
+  border:none;
+  padding:8px 12px;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.removeBtn:hover{
+  background:#dc2626;
+}
+
+.totalSection{
+  margin-top:40px;
+  text-align:right;
+}
+
+.checkoutBtn{
+  margin-top:15px;
+  padding:12px 25px;
+  background:#be123c;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.checkoutBtn:hover{
+  background:black;
+}.qtyBox {
   display: flex;
   align-items: center;
   gap: 15px;
