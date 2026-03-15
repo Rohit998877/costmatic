@@ -10,7 +10,7 @@ function Home() {
   return (
     <>
       <section className={styles.hero}>
-        <h1>Luxury Beauty Experience</h1>
+        <h1 className={styles.heroline}>Luxury Beauty Experience</h1>
       </section>
 
       <CategorySection />
