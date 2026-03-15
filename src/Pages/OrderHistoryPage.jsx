@@ -13,6 +13,7 @@ function OrderHistoryPage() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // 🔥 FETCH ORDERS
   useEffect(() => {
 
     const fetchOrders = async () => {
@@ -45,21 +46,34 @@ function OrderHistoryPage() {
   }, []);
 
 
+  // 🔥 REMOVE ORDER
   const handleRemove = async (id) => {
 
-    await deleteDoc(doc(db, "orders", id));
+    try {
 
-    setOrders(orders.filter((order) => order.id !== id));
+      await deleteDoc(doc(db, "orders", id));
+
+      setOrders((prev) =>
+        prev.filter((order) => order.id !== id)
+      );
+
+    } catch (error) {
+
+      console.error("Delete Error:", error);
+
+    }
 
   };
 
 
   if (loading) {
+
     return (
       <div className={styles.container}>
         <h2>Loading Orders...</h2>
       </div>
     );
+
   }
 
 
@@ -81,6 +95,8 @@ function OrderHistoryPage() {
 
             <div key={order.id} className={styles.card}>
 
+              {/* ORDER HEADER */}
+
               <div className={styles.top}>
 
                 <div>
@@ -90,17 +106,19 @@ function OrderHistoryPage() {
                   </p>
 
                   <p className={styles.date}>
-                    {order.createdAt?.toDate().toLocaleString()}
+                    {order.createdAt?.toDate()?.toLocaleString()}
                   </p>
 
                 </div>
 
                 <span className={styles.status}>
-                  {order.paymentStatus}
+                  {order.paymentStatus || "Success"}
                 </span>
 
               </div>
 
+
+              {/* ORDER ITEMS */}
 
               <div className={styles.items}>
 
@@ -113,11 +131,15 @@ function OrderHistoryPage() {
                       0;
 
                     return (
+
                       <div key={index} className={styles.item}>
 
-                        <img src={item.image} alt={item.name} />
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                        />
 
-                        <div>
+                        <div className={styles.info}>
 
                           <h4>{item.name}</h4>
 
@@ -128,12 +150,16 @@ function OrderHistoryPage() {
                         </div>
 
                       </div>
+
                     );
+
                   })}
 
               </div>
 
 
+              {/* ORDER FOOTER */}
+
               <div className={styles.bottom}>
 
                 <h3>Total: ₹{order.total}</h3>
@@ -158,74 +184,7 @@ function OrderHistoryPage() {
     </div>
 
   );
-}
 
-export default OrderHistoryPage;    setOrders(orders.filter((order) => order.id !== id));
-  };
-
-  if (loading) {
-    return (
-      <div className={styles.container}>
-        <h2>Loading Orders...</h2>
-      </div>
-    );
-  }
-
-  return (
-    <div className={styles.container}>
-      <h2 className={styles.heading}>My Orders</h2>
-
-      {orders.length === 0 ? (
-        <p className={styles.empty}>No orders found.</p>
-      ) : (
-        <div className={styles.grid}>
-          {orders.map((order) => (
-            <div key={order.id} className={styles.card}>
-              <div className={styles.top}>
-                <div>
-                  <p className={styles.orderId}>
-                    Order ID: {order.orderId}
-                  </p>
-                  <p className={styles.date}>
-                    {order.createdAt?.toDate().toLocaleString()}
-                  </p>
-                </div>
-
-                <span className={styles.status}>
-                  {order.paymentStatus}
-                </span>
-              </div>
-
-              <div className={styles.items}>
-                {Array.isArray(order.items) &&
-                  order.items.map((item, index) => (
-                    <div key={index} className={styles.item}>
-                      <img src={item.image} alt={item.name} />
-                      <div>
-                        <h4>{item.name}</h4>
-                        <p>Qty: {item.qty}</p>
-                        <p>₹{item.price}</p>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-
-              <div className={styles.bottom}>
-                <h3>Total: ₹{order.total}</h3>
-
-                <button
-                  className={styles.removeBtn}
-                  onClick={() => handleRemove(order.id)}
-                >
-                  Remove Order
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
 }
 
 export default OrderHistoryPage;
